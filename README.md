@@ -2,7 +2,7 @@
 A set of real-world networks in the format of a network stream consisting of edge additions and deletions. The program to generate the networks from the original data is included. All sources are available in the source code.
 
 Sources:
-##UNDIRECTED NETWORKS
+## UNDIRECTED NETWORKS
 Email. Source: https://snap.stanford.edu/data/email-Eu-core-temporal.html
 
 Mooc. Souce: https://snap.stanford.edu/data/act-mooc.html
