@@ -1,0 +1,8 @@
+Network: retweets
+Number of edges in the initial network: 151172
+Number of edge additions: 332863
+Number of edge deletions: 445473
+Number of edges not deleted: 13345
+Last timestamp: 493688
+Total number of nodes: 321307
+Average number of edges: 197436

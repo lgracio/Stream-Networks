@@ -1,0 +1,8 @@
+Network: mathoverflow
+Number of edges in the initial network: 180
+Number of edge additions: 38868
+Number of edge deletions: 38415
+Number of edges not deleted: 610
+Last timestamp: 55740481
+Total number of nodes: 21594
+Average number of edges: 926

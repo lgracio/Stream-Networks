@@ -1,0 +1,8 @@
+Network: violence
+Number of edges in the initial network: 106
+Number of edge additions: 372
+Number of edge deletions: 384
+Number of edges not deleted: 254
+Last timestamp: 121824000
+Total number of nodes: 29
+Average number of edges: 121
