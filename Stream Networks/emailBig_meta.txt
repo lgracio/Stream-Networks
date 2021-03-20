@@ -1,0 +1,9 @@
+Network: emailBig
+Number of edges in the initial network: 4083
+Number of edge additions: 62859
+Number of edge deletions: 63199
+Number of edges not deleted: 1522
+Last timestamp: 31484252
+Total number of nodes: 986
+Average number of edges: 3491
+Number of updates: 126058

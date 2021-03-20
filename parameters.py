@@ -5,7 +5,9 @@ SECONDS_IN_DAY = 60 * 60 * 24
 data = {
     # UNDIRECTED NETWORKS
     # Email. Source: https://snap.stanford.edu/data/email-Eu-core-temporal.html
-    "email": (True, False, 0, 7 * SECONDS_IN_DAY, 0.65, "Source Networks/email-Eu-core-temporal.txt"),
+    "emailBig": (True, False, 0, 7 * SECONDS_IN_DAY, 0.65, "Source Networks/email-Eu-core-temporal.txt"),
+
+    "emailSmall": (True, False, 0, 0.5*SECONDS_IN_DAY, 1, "Source Networks/email-Eu-core-temporal-Dept4.txt"),
 
     # Mooc. Souce: https://snap.stanford.edu/data/act-mooc.html
     "mooc": (True, False, 1, 1*SECONDS_IN_DAY, 0.1, "Source Networks/mooc_actions.tsv"),
