@@ -1,35 +1,10 @@
 import matplotlib.pyplot as plt
 import matplotlib.backends.backend_pdf
+from parameters import *
 
-SECONDS_IN_DAY = 60 * 60 * 24
+
 
 def main():
-
-    # Parameters: compute?, directed, preprocess type,  sliding-window size, sample fraction,  network file
-    data = {
-        # UNDIRECTED NETWORKS
-        # Email. Source: https://snap.stanford.edu/data/email-Eu-core-temporal.html
-        "email": (True, False, 0, 7 * SECONDS_IN_DAY, 0.65, "Networks/email-Eu-core-temporal.txt"),
-
-        # Mooc. Souce: https://snap.stanford.edu/data/act-mooc.html
-        "mooc": (True, False, 1, 1*SECONDS_IN_DAY, 0.1, "Networks/mooc_actions.tsv"),
-
-        # 9/11. Source: http://vlado.fmf.uni-lj.si/pub/networks/data/CRA/terror.htm
-        "911": (True, False, 4, 1*SECONDS_IN_DAY,1,"Networks/Days.net"),
-
-        # DIRECTED NETWORKS
-        # Violence. Source: http://vladowiki.fmf.uni-lj.si/doku.php?id=pajek:data:temp:fran
-        "violence": (True, True, 3, 365*SECONDS_IN_DAY, 1, "Networks/violence.ten"),
-
-        # Mathoverlow. Source: https://snap.stanford.edu/data/sx-mathoverflow.html
-        "mathoverflow": (True, True, 0, 14*SECONDS_IN_DAY, 0.4, "Networks/sx-mathoverflow-a2q.txt"),
-
-        # Retweets. Source: https://github.com/manlius/SocialBursts/tree/master/Network_Data
-        #           Paper:  https://www.nature.com/articles/s41598-020-61523-z.pdf
-        "retweets": (True, True, 2, SECONDS_IN_DAY, 1, "Networks/GRAVITATIONAL_WAVES_2016-activity.txt")
-    }
-
-
     for net in data.keys():
         if not data[net][0]:
             continue
@@ -76,6 +51,7 @@ def main():
         edges = edges[:int(sample_fraction*len(edges))]
         last_timestamp = edges[-1][2]
 
+
         # Queue to compute timeout of edges
         edge_timout = []
 
@@ -83,7 +59,7 @@ def main():
         edge_exists = {}
 
         # Compute and store the initial state of the network (before updates)
-        output_initial = open("Outputs/"+net+"_initial.edges",'w')
+        output_initial = open("Stream Networks/"+net+"_initial.edges",'w')
         output_initial.write("DIRECTED\n") if directed else output_initial.write("UNDIRECTED\n")
         output_initial.write("Nodes "+str(number_of_nodes)+'\n')
 
@@ -103,9 +79,10 @@ def main():
         time_distribution = [timeStamp]
 
         # Compute and store the edge updates
-        output_stream = open("Outputs/"+net+"_stream.edges",'w')
+        output_stream = open("Stream Networks/"+net+"_stream.edges",'w')
         n_additions = 0
         n_deletions = 0
+
 
         while edges:
             node1, node2, timeStamp = edges.pop(0)
@@ -127,18 +104,20 @@ def main():
                 cur_edges += 1
                 edge_distribution.append(cur_edges)
                 time_distribution.append(timeStamp)
-            edge_timout.append((node1,node2,timeStamp+window_size))
+                edge_timout.append((node1,node2,timeStamp+window_size))
         output_stream.close()
 
 
         # Create a file with some meta information
-        output_meta = open("Outputs/"+net+"_meta.txt",'w')
+        output_meta = open("Stream Networks/"+net+"_meta.txt",'w')
         string = "Network: "+net+"\nNumber of edges in the initial network: "+str(size_initial_network)+\
                  "\nNumber of edge additions: "+ str(n_additions)+"\nNumber of edge deletions: "+str(n_deletions)+\
                  "\nNumber of edges not deleted: "+str(len(edge_timout))+"\nLast timestamp: "+str(last_timestamp)+\
             "\nTotal number of nodes: "+str(number_of_nodes)+"\nAverage number of edges: "\
-                 +str(round(sum(edge_distribution)/len(edge_distribution)))
+                 +str(round(sum(edge_distribution)/len(edge_distribution)))+"\nNumber of updates: "+\
+                 str(n_additions+n_deletions)
         print(string)
+        print("--------------------------------------------")
         output_meta.write(string)
 
 
@@ -174,6 +153,7 @@ def verify_edge_NOTexists(edge_exists, directed, node1, node2):
     else:
         return (((node1,node2) not in edge_exists.keys()) or (not edge_exists[(node1,node2)])) and \
                (((node2,node1) not in edge_exists.keys()) or (not edge_exists[(node2,node1)]))
+
 
 
 def preprocess(t, filename):
