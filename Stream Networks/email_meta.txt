@@ -1,4 +1,4 @@
-Network: emailSmall
+Network: email
 Number of edges in the initial network: 118
 Number of edge additions: 24789
 Number of edge deletions: 24858

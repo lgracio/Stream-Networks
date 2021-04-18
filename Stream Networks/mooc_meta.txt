@@ -1,9 +1,9 @@
 Network: mooc
-Number of edges in the initial network: 4953
-Number of edge additions: 18884
-Number of edge deletions: 14484
-Number of edges not deleted: 7599
-Last timestamp: 273496
+Number of edges in the initial network: 499
+Number of edge additions: 36955
+Number of edge deletions: 35417
+Number of edges not deleted: 2012
+Last timestamp: 2571054
 Total number of nodes: 7144
-Average number of edges: 10124
-Number of updates: 33368
+Average number of edges: 1334
+Number of updates: 72372

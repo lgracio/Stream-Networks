@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
 import matplotlib.backends.backend_pdf
 from parameters import *
+import random
 
-
+random.seed(1)
 
 def main():
     for net in data.keys():
@@ -44,11 +45,18 @@ def main():
         # Sort the edges chronologically
         sorted_edges = sorted(new_edges, key=lambda tup: tup[2])
 
+        # Sample the edges
+        new_edges = []
+        for edge in sorted_edges:
+            if random.uniform(0,1) < sample_fraction:
+                new_edges.append(edge)
+        sorted_edges = new_edges
+
+
         # Normalize timestamps so that the first value is 0
         edges = [(node1,node2,timeStamp-sorted_edges[0][2]) for (node1,node2,timeStamp) in sorted_edges]
 
-        # Sample the network
-        edges = edges[:int(sample_fraction*len(edges))]
+
         last_timestamp = edges[-1][2]
 
 
